@@ -1,0 +1,42 @@
+combinedb:
+  #build: db/.
+  image: ncsulibrariesdli/combine_pg:latest
+  environment:
+    - POSTGRES_PASSWORD=gherD42#dl5
+  restart: always
+lentilapp:
+  #Uncomment below line to build new image
+  #build: lentil/.
+  image: ncsulibrariesdli/combine_lentil:latest
+  ports:
+    - "3000:3000"
+  links:
+    - combinedb:mydb
+  volumes:
+    - /vagrant/archive/lentil-store:/lentil-store
+    - /vagrant/lentil:/src/lentil
+  restart: always
+sfmapp:
+  image: gwul/sfm_app:latest
+  ports:
+    - "8000:80"
+  links:
+    - combinedb:db
+  volumes:
+    - /vagrant/archive/sfm-store:/var/sfm
+    - /vagrant/sfm:/src/sfm
+  env_file:
+    - ./sfm/sfm_config.txt
+  restart: always
+webconfig:
+  #Uncomment below line to build new image
+  #build: web-configuration-tool/.
+  image: ncsulibrariesdli/combine_webconfig:latest
+  ports:
+    - "8080:8080"
+  volumes:
+    - /vagrant/lentil:/src/lentil
+    - /vagrant/sfm:/src/sfm
+    - /vagrant/web-configuration-tool:/src/web-configuration-tool
+    - /vagrant/config_updates:/src/config_updates
+  restart: always

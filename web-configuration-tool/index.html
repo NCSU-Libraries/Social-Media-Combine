@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" ng-app="myModule">
+<head>
+  <meta charset="utf-8">
+  <title>Web Configuration Tool</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div id="container" class="container">
+    <div class="row">
+      <h1>Web Configuration Tool</h1>
+      <div>
+        <h2>Instagram Help</h2>
+        <a target="_blank" href="https://instagram.com/accounts/login/"> Instagram account creation</a><br>
+        <a target="_blank" href="https://instagram.com/developer/"> Instagram application creation</a><br>
+        <h2>Twitter Help</h2>
+        <a target="_blank" href="https://twitter.com/signup"> Twitter account creation</a><br>
+        <a target="_blank" href="https://apps.twitter.com/app/new"> Twitter application creation</a> (be sure to enter a Callback URL, it doesn't matter what it is).<br>
+        <a target="_blank" href="http://social-feed-manager.readthedocs.org/en/m5_003/install.html#configuration"></a><br>
+      </div>
+    </div>
+
+    <div class="row">
+      <h2>Enter New Values</h2>
+      <div ng-controller="FormController" class="col-md-6">
+        <form name="myForm" sf-schema="schema" sf-form="form" sf-model="model" ng-submit="onSubmit(myForm,model)"></form>
+      </div>
+    </div>
+  </div>
+
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="bower_components/tv4/tv4.js"></script>
+  <script src="bower_components/objectpath/lib/ObjectPath.js"></script>
+  <script src="bower_components/angular-schema-form/dist/schema-form.min.js"></script>
+  <script src="bower_components/angular-schema-form/dist/bootstrap-decorator.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="js/controllers.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.vagrant
+npm-debug.log
+lentil_config.yml
+sfm_config.txt
+web-configuration-tool/committed/values.txt
+archive/lentil-store/*
+archive/sfm-store/*
+web-configuration-tool/node_modules
+web-configuration-tool/bower_components

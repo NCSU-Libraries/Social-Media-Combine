@@ -1,0 +1,37 @@
+defaults: &defaults
+
+  instagram_client_id: YOUR_INSTAGRAM_CLIENT_ID
+
+  instagram_client_secret: YOUR_INSTAGRAM_CLIENT_SECRET
+
+  instagram_access_token: YOUR_INSTAGRAM_ACCESS_TOKEN
+
+  organization_name: YOUR_UNIVERSITY
+
+  division_url: http://example.com
+
+  application_name: YOUR_APP
+
+  division_name: YOUR_DIVISION
+
+  meta_description: YOUR_META
+
+  default_image_search_tag: YOUR_IMAGE SEARCH_TAG
+
+  base_image_file_dir: /lentil-store
+
+  donor_agreement_text: YOUR_DONOR_AGREEMENT
+
+  google_analytics_tracker: YOUR_ANALYTICS
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
