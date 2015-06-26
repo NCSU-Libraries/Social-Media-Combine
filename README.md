@@ -22,7 +22,7 @@ Steps to run
 4. Open `Terminal` on a Mac, `Git Shell` on Windows, or your preferred shell on Linux and clone this repository using git.
 
     ```
-    git clone git@github.com:NCSU-Libraries/Social-Media-Combine.git
+    git clone https://github.com/NCSU-Libraries/Social-Media-Combine.git
     cd Social-Media-Combine
     ```
 5. Run
