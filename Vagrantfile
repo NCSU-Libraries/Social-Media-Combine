@@ -63,7 +63,7 @@ Vagrant.configure(2) do |config|
   # Just pull the images from Docker Hub
   config.vm.provision "docker"
 
-  config.vm.provision :shell, :inline => "sudo start docker", run: "always"
+  config.vm.provision :shell, :inline => "sudo start docker || true", run: "always"
   # Shell based provisioning to bring up containers using docker compose
   config.vm.provision "init", type: "shell" do |s|
     s.inline = "cd /vagrant && chmod u+x init.sh && ./init.sh"
