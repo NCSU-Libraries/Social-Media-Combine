@@ -4,7 +4,7 @@
 # Verify and install required plugins
 # required_plugins = %w(vagrant-timezone vagrant-host-shell)
 # TODO: Should we auto-update these?
-required_plugins = %w(vagrant-host-shell vagrant-exec vagrant-faster)
+required_plugins = %w(vagrant-host-shell vagrant-exec vagrant-faster vagrant-vbguest)
 required_plugins.each do |plugin|
   need_restart = false
   unless Vagrant.has_plugin? plugin
@@ -15,6 +15,8 @@ required_plugins.each do |plugin|
 end
 
 Vagrant.configure(2) do |config|
+  config.vm.network "private_network", type: "dhcp"
+
   # Host platform detection
   if RUBY_PLATFORM["darwin"]
     hostOS="OSX"
@@ -43,15 +45,7 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 8080, host: 8081, auto_correct: false
   config.vm.network "forwarded_port", guest: 3000, host: 3001, auto_correct: false
 
-  # Allocate RAM to VM
-  config.vm.provider "virtualbox" do |vb|
-    # Display the VirtualBox GUI when booting the machine
-    #   vb.gui = true
-    # Customize the amount of memory on the VM:
-    #vb.memory = "2048"
-    # Selected Base Image is Ubuntu 14.04
-    config.vm.box = "ubuntu/trusty64"
-  end
+  config.vm.box = "phusion/ubuntu-14.04-amd64"
 
   # Allocate RAM to VM
   # Parallels image
