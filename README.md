@@ -36,8 +36,6 @@ Troubleshooting
 ---------------
 1. The first time it's started, the Combine will download a lot of application data. Occasionally, one of these downloads will fail and you may see some error messages or be unable to reach one of the applications. In order to retry the Combine setup, run `vagrant provision`.
 
-2. You may occasionally set `apt-get` errors when first setting up the Combine. In this case, you may sometimes need to update the underlying machine image by running `vagrant box update.`
-
 Administrative information
 --------------------------
 Lentil:
@@ -71,7 +69,7 @@ Steps for updating applications
 TO DO
 =====
 * Upgrade and Rollback
-  - There is a hook in VagrantFile for upgrade procedure.
+  - There is a hook in Vagrantfile for upgrade procedure.
   - The upgrade.sh script shall perform check point to roll back in case of failure.
   - Then check the version number of lentil and Social Feed Manager application. Perform upgrade according to specified version.
   - If possible take the target version from web config form.
