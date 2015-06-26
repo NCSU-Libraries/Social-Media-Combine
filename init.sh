@@ -23,11 +23,12 @@ echo "Copying application configs"
 cp -n lentil/lentil_example_config.yml lentil/lentil_config.yml
 cp -n sfm/sfm_example_config.txt sfm/sfm_config.txt
 
-echo "Run containers"
+echo "Pulling containers"
 sudo docker-compose pull
+echo "Running containers"
 sudo docker-compose up -d --timeout 600
-echo "Successfully started containers!!!"
 
+echo "Launching configuration watcher"
 cp config_updates/combine_reconfig.conf /etc/init/combine_reconfig.conf
 initctl reload-configuration
 start combine_reconfig
