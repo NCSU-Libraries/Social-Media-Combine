@@ -7,9 +7,13 @@ ENV LC_ALL en_US.UTF-8
 
 ENV HOME /root
 CMD ["/sbin/my_init"]
-RUN mkdir /applications && \
+# Install and upgrade dependencies
+RUN apt-get update && \
+apt-get -y install git postgresql-client && \
+apt-get install -y -o Dpkg::Options::="--force-confold" nginx-extras passenger && \
+mkdir /applications && \
 mkdir /home/app/lentilapp
-#VOLUME /home/app/lentilapp
+
 WORKDIR /applications
 
 # Use most recent RubyGems
@@ -29,10 +33,6 @@ WORKDIR /applications/lentilapp
 #RUN gem install jquery-rails --version "$JQUERY_VERSION"
 
 # Create rails app
-
-# Install git to fetch latest lentil release
-RUN apt-get update && \
-apt-get -y install git postgresql-client
 
 # Removing jquery requirement from Gemfile to replace it with required version associated with lentil
 RUN grep -v "jquery-rails" Gemfile > temp && mv temp Gemfile && \

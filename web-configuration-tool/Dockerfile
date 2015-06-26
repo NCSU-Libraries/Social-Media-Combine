@@ -26,7 +26,9 @@ COPY package.json /home/app/webconfig/package.json
 COPY bower.json /home/app/webconfig/bower.json
 COPY js/ /home/app/webconfig/js/
 
-RUN npm install && \
+RUN apt-get update && \
+apt-get install -y -o Dpkg::Options::="--force-confold" nginx-extras passenger && \
+npm install && \
 ./node_modules/bower/bin/bower install
 
 # Permissions and logging
