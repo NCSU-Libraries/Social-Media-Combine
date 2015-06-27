@@ -15,7 +15,6 @@ required_plugins.each do |plugin|
 end
 
 Vagrant.configure(2) do |config|
-  config.vm.network "private_network", type: "dhcp"
 
   # Host platform detection
   if RUBY_PLATFORM["darwin"]
