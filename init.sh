@@ -9,7 +9,7 @@ cd /tmp
 echo "Override docker upstart init config"
 echo "start on (vagrant-mounted and filesystem and net-device-up IFACE!=lo)" > /etc/init/docker.override
 echo "Install curl if required..."
-sudo apt-get -y install curl nodejs wget inoticoming
+sudo apt-get -y install curl nodejs wget inoticoming htop
 
 echo "Installing docker-compose..."
 wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
