@@ -15,8 +15,8 @@ app.post('/Submit',function(request,response){
   var jsonString = JSON.stringify(request.body);
   var jsonObj    = JSON.parse(jsonString);
 
-  fs.unlink(lentil_cfg);
-  fs.unlink(sfm_cfg);
+  fs.unlinkSync(lentil_cfg);
+  fs.unlinkSync(sfm_cfg);
 
   fs.appendFileSync(lentil_cfg, "defaults: &defaults\n\n");
 
