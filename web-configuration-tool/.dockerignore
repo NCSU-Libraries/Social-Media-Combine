@@ -1,0 +1,6 @@
+.dockerignore
+Dockerfile
+committed
+*.md
+node_modules
+bower_components
