@@ -1,10 +1,5 @@
 FROM phusion/passenger-customizable:latest
 
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-
 # Create directories
 ENV HOME /home/app
 CMD ["/sbin/my_init"]
@@ -16,7 +11,7 @@ mkdir /tmp/webconfig \
 /home/app/webconfig/public \
 /home/app/webconfig/tmp && \
 mkdir -p /etc/my_init.d && \
-apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /pd_build
 
 # Copy Files
 COPY server.js /tmp/webconfig/app.js
