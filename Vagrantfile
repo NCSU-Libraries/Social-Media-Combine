@@ -4,7 +4,7 @@
 # Verify and install required plugins
 # required_plugins = %w(vagrant-timezone vagrant-host-shell)
 # TODO: Should we auto-update these?
-required_plugins = %w(vagrant-host-shell vagrant-exec vagrant-faster vagrant-vbguest)
+required_plugins = %w(vagrant-host-shell vagrant-exec vagrant-vbguest)
 required_plugins.each do |plugin|
   need_restart = false
   unless Vagrant.has_plugin? plugin
