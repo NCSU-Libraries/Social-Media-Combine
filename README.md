@@ -32,15 +32,14 @@ Steps to run
    ```
 > **If working on Windows** and `vagrant up` immediately returns errors, you may need to run `sh eol_to_unix.sh`
 
-   This opens a web browser with configuration form. If it doesn't, visit http://localhost:8081 in your browser. Make changes and click OK.
+   This opens a web browser with configuration form. If it doesn't, visit <http://localhost:8081> in your browser. Make changes and click OK.
 
-6. Enter configuration parameters in the web configuration form and click OK.
-7. Your applications should be updated within a minute or so.
+6. Enter configuration parameters in the web configuration form and click OK. Your applications should be updated within a minute or so.
 
-Visit
- - Lentil: http://localhost:3001
- - Social Feed Manager: http://localhost:8001
- - Configuration tool: http://localhost:8081
+Visit:
+ - Lentil: <http://localhost:3001>
+ - Social Feed Manager: <http://localhost:8001>
+ - Configuration tool: <http://localhost:8081>
 
 Troubleshooting
 ---------------
@@ -50,12 +49,12 @@ Troubleshooting
 Administrative information
 --------------------------
 Lentil:
- - URL: http://localhost:3001/admin
+ - URL: <http://localhost:3001/admin>
  - default username: admin@example.com
  - default password: password
 
 Social Feed Manager:
- - URL: http://localhost:8001/admin
+ - URL: <http://localhost:8001/admin>
  - default username: sfmadmin
  - default password: password
 
@@ -63,7 +62,7 @@ Steps for Reconfiguration
 --------------------------
 Application reconfiguration can be performed after deployment.
 
-1. Open web configuration tool at http://localhost:8081. Make changes and click OK.
+1. Open web configuration tool at <http://localhost:8081>. Make changes and click OK.
 
 2. Your applications should be updated within a minute or so.
 
