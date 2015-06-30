@@ -36,7 +36,6 @@ Steps to run
 
 6. Enter configuration parameters in the web configuration form and click OK.
 7. Your applications should be updated within a minute or so.
-8. Commit the changes
 
 Visit
  - Lentil: http://localhost:3001
