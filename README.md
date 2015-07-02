@@ -46,6 +46,10 @@ Troubleshooting
 1. The first time it's started, the Combine will download a lot of application data. Occasionally, one of these downloads will fail and you may see some error messages or be unable to reach one of the applications. In order to retry the Combine setup, run `vagrant provision`.
 2. Don't see any data? Lentil will harvest images every 15 minutes, and Social Feed Manager will harvest Tweets every 6 hours.
 
+Extracting data
+---------------
+After you have been harvesting content for a day or so, take a look in the `archive` directory. Some Social Feed Manager content may not yet appear in this directory, but will still be present in the database.
+
 Administrative information
 --------------------------
 Lentil:
