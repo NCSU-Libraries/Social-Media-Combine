@@ -80,6 +80,10 @@ Steps for updating applications
     vagrant provision
     ```
 
+Feedback
+========
+Please email Jason Casden at jmcasden@ncsu.edu with any questions or suggestions.
+
 TO DO
 =====
 * Upgrade and Rollback
