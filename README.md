@@ -18,7 +18,7 @@ Steps to run
 -------------
 1. Install [Git](https://help.github.com/articles/set-up-git/)
 2. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-3. Install [Vagrant](https://www.vagrantup.com/downloads.html) version 1.7.2 or greater on your host machine.
+3. Install [Vagrant](https://www.vagrantup.com/downloads.html) version 1.7.3 or greater on your host machine.
 4. Open `Terminal` on a Mac, `Git Shell` on Windows, or your preferred shell on Linux and clone this repository using git.
 
     ```
