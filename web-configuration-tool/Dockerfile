@@ -1,4 +1,4 @@
-FROM phusion/passenger-customizable:latest
+FROM phusion/passenger-nodejs:latest
 
 # Copy Files
 RUN mkdir -p /home/app/webconfig \
@@ -14,9 +14,8 @@ COPY . /home/app/webconfig/
 ENV HOME /home/app
 CMD ["/sbin/my_init"]
 RUN apt-get update -qq && \
+apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
 mv /home/app/webconfig/webcfg_init.sh /etc/my_init.d/webcfg_init.sh && \
-/pd_build/nodejs.sh && \
-apt-get install -y -o Dpkg::Options::="--force-confold" nginx-extras passenger && \
 npm install && \
 ./node_modules/bower/bin/bower --allow-root install && \
 npm cache clean && \

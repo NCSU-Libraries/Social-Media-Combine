@@ -1,12 +1,11 @@
-FROM phusion/passenger-customizable:latest
+FROM phusion/passenger-ruby22:latest
 
 ENV HOME=/root \
 RAILS_VERSION='~> 3.2'
 CMD ["/sbin/my_init"]
 COPY lentil_example_config.yml invoke.sh lentilapp.conf /tmp/
 RUN apt-get update -qq && \
-/pd_build/ruby2.2.sh && \
-apt-get install -y -o Dpkg::Options::="--force-confold" git nginx-extras passenger && \
+apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
 cd /home/app && \
 gem install rails --version "$RAILS_VERSION" && \
 rails new lentilapp -d postgresql && \
