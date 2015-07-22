@@ -12,7 +12,7 @@ What's inside?
 * A full pre-configured server environment to support all included software
 * A new single web-based configuration interface for all included software
 * Upgrade and system management scripts
-* Data export capabilities
+* Some data export capabilities
 
 Steps to run
 -------------
@@ -46,9 +46,11 @@ Troubleshooting
 1. The first time it's started, the Combine will download a lot of application data. Occasionally, one of these downloads will fail and you may see some error messages or be unable to reach one of the applications. In order to retry the Combine setup, run `vagrant provision`.
 2. Don't see any data? Lentil will harvest images every 15 minutes, and Social Feed Manager will harvest Tweets every 6 hours.
 
-Extracting data
+Exporting data
 ---------------
 After you have been harvesting content for a day or so, take a look in the `archive` directory. Some Social Feed Manager content may not yet appear in this directory, but will still be present in the database.
+
+To generate a CSV export of data collected for a Twitter user (e.g. @cazzerson) in Social Feed Manager, you can run `vagrant exec 'docker exec vagrant_sfmapp_1 ./sfm/manage.py export_csv --twitter-user cazzerson'`. You can also add users to a set (e.g. myset) in the Social Feed Manager administrative tools and then export this set of users with `vagrant exec 'docker exec vagrant_sfmapp_1 ./sfm/manage.py export_csv --set-name myset'`.
 
 Administrative information
 --------------------------
