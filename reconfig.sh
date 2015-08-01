@@ -10,4 +10,8 @@ cp -n sfm/sfm_example_config.txt sfm/sfm_config.txt
 #docker-compose restart sfmapp
 
 echo "Recreating containers"
+docker-compose stop webconfig
+docker-compose stop sfmapp
+docker-compose stop lentilapp
+docker-compose stop combinedb
 docker-compose up -d --timeout 300
