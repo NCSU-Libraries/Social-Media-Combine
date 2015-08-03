@@ -27,7 +27,7 @@ cp -n sfm/sfm_example_config.txt sfm/sfm_config.txt
 echo "Pulling containers"
 sudo docker-compose pull
 echo "Running containers"
-sudo docker-compose up -d --timeout 300
+./reconfig.sh
 
 echo "Launching configuration watcher"
 cp config_updates/combine_reconfig.conf /etc/init/combine_reconfig.conf
