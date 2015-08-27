@@ -1,3 +1,3 @@
 FROM postgres:9
 
-ADD initdb.sh /docker-entrypoint-initdb.d/
+ADD initdb.sql /docker-entrypoint-initdb.d/
