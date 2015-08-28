@@ -30,6 +30,7 @@ echo "Running containers"
 ./reconfig.sh
 
 echo "Launching configuration watcher"
+cp config_updates/workaround-vagrant-bug-6074.conf /etc/init/workaround-vagrant-bug-6074.conf
 cp config_updates/combine_reconfig.conf /etc/init/combine_reconfig.conf
 initctl reload-configuration
 start combine_reconfig
