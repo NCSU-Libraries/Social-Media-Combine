@@ -29,19 +29,11 @@ app.controller("FormController", function($scope, $http, $templateCache) {
         "minLength": 2,
         "validationMessage": "Entered value should be greater than 2 and less than 100 characters."
       },
-      "default_image_search_tag": {
-        "title": "Image Search Tag",
-        "type": "string",
-        "maxLength": 50,
-        "description": "Hashtag to use for default Instagram harvest if no others are defined.",
-        "minLength": 2,
-        "validationMessage": "Entered value should be greater than 2 and less than 50 characters."
-      },
       "google_analytics_tracker": {
-        "title": "Google Analytics Tracker",
+        "title": "Google Analytics Tracker (OPTIONAL)",
         "type": "string",
         "maxLength": 20,
-        "description": "Google Analytics tracker Id.",
+        "description": "Google Analytics tracker ID for tracking lentil usage.",
         "minLength": 2,
         "validationMessage": "Entered value should be greater than 2 and less than 20 characters."
       },
@@ -97,9 +89,9 @@ app.controller("FormController", function($scope, $http, $templateCache) {
         "title": "Donor Agreement Text",
         "description": "Text for lentil donor agreements if submitted by application. Currently disabled.",
         "type": "string",
-        "maxLength": 100,
+        "maxLength": 300,
         "minLength": 2,
-        "validationMessage": "Entered value should be greater than 2 and less than 100 characters."
+        "validationMessage": "Entered value should be greater than 2 and less than 300 characters."
       },
       // "dummy_admin_user": {
       //   "title": "Add Dummy Admin User?",
@@ -150,7 +142,6 @@ app.controller("FormController", function($scope, $http, $templateCache) {
       "application_name",
       "division_name",
       "meta_description",
-      "default_image_search_tag",
       "SFM_TWITTER_DEFAULT_USERNAME",
       "SFM_TWITTER_CONSUMER_KEY",
       "SFM_TWITTER_CONSUMER_SECRET"
@@ -207,12 +198,6 @@ app.controller("FormController", function($scope, $http, $templateCache) {
       "htmlClass": "content",
       "labelHtmlClass": "md_label",
       "fieldHtmlClass": "md_field"
-    }, {
-      "key": "default_image_search_tag",
-      "placeholder": "Enter Image Search Tag",
-      "htmlClass": "content",
-      "labelHtmlClass": "dist_label",
-      "fieldHtmlClass": "dist_field"
     }, {
       "key": "base_image_file_dir",
       "placeholder": "/lentil-store",
