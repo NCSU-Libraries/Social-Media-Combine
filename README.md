@@ -77,7 +77,7 @@ Application reconfiguration can be performed after deployment.
 Steps for updating applications
 -------------------------------
 
-1. In your terminal application, while in the project directory, run
+1. In your terminal application, while in the Social Media Combine directory, run
     ```
     vagrant provision
     ```
