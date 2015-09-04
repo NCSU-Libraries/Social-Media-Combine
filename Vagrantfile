@@ -1,14 +1,29 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'getoptlong'
+
+opts = GetoptLong.new(
+  [ '--plugins-updated', GetoptLong::OPTIONAL_ARGUMENT ]
+)
+
+alreadyUpdated=''
+
+opts.each do |opt, arg|
+  case opt
+    when '--plugins-updated'
+      alreadyUpdated=arg
+  end
+end
+
 # Verify and install required plugins
 required_plugins = "vagrant-host-shell vagrant-exec vagrant-vbguest"
 
-if ENV['VAGRANT_PLUGINS_UPDATED'] != 'true' && (ARGV[0] == "up" || ARGV[0] == "provision")
+if alreadyUpdated != 'true' && (ARGV[0] == "up" || ARGV[0] == "provision")
   system "vagrant plugin update #{required_plugins}"
 
   # Restart vagrant after plugin updates
-  exec "VAGRANT_PLUGINS_UPDATED=true vagrant #{ARGV.join(' ')}"
+  exec "vagrant --plugins-updated=true #{ARGV.join(' ')}"
 end
 
 Vagrant.configure(2) do |config|
