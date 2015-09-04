@@ -2,16 +2,13 @@
 # vi: set ft=ruby :
 
 # Verify and install required plugins
-# required_plugins = %w(vagrant-timezone vagrant-host-shell)
-# TODO: Should we auto-update these?
-required_plugins = %w(vagrant-host-shell vagrant-exec vagrant-vbguest)
-required_plugins.each do |plugin|
-  need_restart = false
-  unless Vagrant.has_plugin? plugin
-    system "vagrant plugin install #{plugin}"
-    need_restart = true
-  end
-  exec "vagrant #{ARGV.join(' ')}" if need_restart
+required_plugins = "vagrant-host-shell vagrant-exec vagrant-vbguest"
+
+if ENV['VAGRANT_PLUGINS_UPDATED'] != 'true' && (ARGV[0] == "up" || ARGV[0] == "provision")
+  system "vagrant plugin update #{required_plugins}"
+
+  # Restart vagrant after plugin updates
+  exec "VAGRANT_PLUGINS_UPDATED=true vagrant #{ARGV.join(' ')}"
 end
 
 Vagrant.configure(2) do |config|
