@@ -9,7 +9,6 @@ RUN mkdir -p /home/app/webconfig \
 WORKDIR /home/app/webconfig
 
 COPY . /home/app/webconfig/
-
 # Create directories
 ENV HOME /home/app
 CMD ["/sbin/my_init"]
@@ -24,5 +23,6 @@ chown -R app:app /home/app && \
 mv /home/app/webconfig/webconfig.conf /etc/nginx/sites-enabled/webconfig.conf && \
 rm /etc/nginx/sites-enabled/default && \
 rm -f /etc/service/nginx/down && \
+curl -sSL https://get.docker.com/ | sh  && \
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /pd_build
 
