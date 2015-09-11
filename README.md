@@ -25,15 +25,46 @@ Steps to run
     git clone https://github.com/NCSU-Libraries/Social-Media-Combine.git
     cd Social-Media-Combine
     ```
-5. Run
+5. You can run Combine on VM or Combine without VM (directly on Docker)
 
-   ```
-   vagrant up
-   ```
+  5.1. Combine on VM
+
+      ```
+      vagrant up
+      ```
+    
+
+   5.2. Combine without VM [tested on Ubuntu 14.04]
+   -  Install [Docker](https://docs.docker.com/installation) version 1.8.1 
+   -  Run Docker Daemon on public interface
+   
+        Append following to the /etc/default/docker file
+
+           ```
+           DOCKER_OPTS="-H <ip>:<port>"
+           ```
+
+        Restart docker service
+
+           ```
+           service docker restart
+           ```
+
+        Define DOCKER_HOST and VAGRANT_NO_PARALLEL environment variables
+
+           ```
+           export DOCKER_HOST=<ip>:<port>
+           export VAGRANT_NO_PARALLEL=true
+           ```
+   - Run
+   
+       ```
+       vagrant up --docker=true
+       ```
 > **If working on Windows** and `vagrant up` immediately returns errors, you may need to run `sh eol_to_unix.sh`
 
-   This opens a web browser with configuration form. If it doesn't, visit <http://localhost:8081> in your browser. Make changes and click OK.
-
+    This opens a web browser with configuration form. If it doesn't, visit <http://localhost:8081> in your browser. Make changes and click OK.
+   
 6. Enter configuration parameters in the web configuration form and click OK. Your applications should be updated within a minute or so.
 
 Visit:
