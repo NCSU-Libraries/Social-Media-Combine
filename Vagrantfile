@@ -2,32 +2,45 @@
 # vi: set ft=ruby :
 
 require 'getoptlong'
-current_dir=File.dirname(File.expand_path(__FILE__))
-opts = GetoptLong.new(
-  [ '--plugins-updated', GetoptLong::OPTIONAL_ARGUMENT ],
-  [ '--docker', GetoptLong::OPTIONAL_ARGUMENT ],
-)
 
-alreadyUpdated=''
-dock='false'
-opts.each do |opt, arg|
-  case opt
-    when '--plugins-updated'
-      alreadyUpdated=arg
-    when '--docker'
-      dock=arg
-  end
+#var definition
+current_dir=File.dirname(File.expand_path(__FILE__))
+alreadyUpdated='false'
+docker_provider='false'
+LENTIL_PORT="3001"
+SFM_PORT="8001"
+WEBCONFIG_PORT="8081"
+
+#env check
+if ENV['VAGRANT_PLUGINS_UPDATED']=='true'
+   alreadyUpdated = 'true'
 end
-print dock
+
+if !ENV['DOCKER_HOST'].nil?
+   docker_provider = 'true'
+end
+
+if !ENV['LENTIL_PORT'].nil?
+   LENTIL_PORT = ENV['LENTIL_PORT']
+end
+
+if !ENV['SFM_PORT'].nil?
+   SFM_PORT = ENV['SFM_PORT']
+end
+
+if !ENV['WEBCONFIG_PORT'].nil?
+   WEBCONFIG_PORT = ENV['WEBCONFIG_PORT']
+end
 
 # Verify and install required plugins
 required_plugins = "vagrant-host-shell vagrant-exec vagrant-vbguest"
 
 if alreadyUpdated != 'true' && (ARGV[0] == "up" || ARGV[0] == "provision")
   system "vagrant plugin update #{required_plugins}"
-
+  ENV['VAGRANT_PLUGINS_UPDATED'] = 'true'
+  ENV['VAGRANT_NO_PARALLEL']='true'
   # Restart vagrant after plugin updates
-  exec "vagrant --plugins-updated=true #{ARGV.join(' ')}"
+  exec "vagrant #{ARGV.join(' ')}"
 end
 
 Vagrant.configure(2) do |config|
@@ -51,8 +64,7 @@ Vagrant.configure(2) do |config|
   #if Vagrant.has_plugin?("vagrant-timezone")
   #config.timezone.value = TimeZone
   #end
-  if dock == 'false'
-    print "vagrant provider"
+  if docker_provider == 'false'
     config.vm.box = "phusion/ubuntu-14.04-amd64"
 
   # port forwarding configuration
@@ -91,12 +103,13 @@ Vagrant.configure(2) do |config|
     #s.inline = "cd /vagrant && chmod u+x upgrade.sh && ./upgrade.sh"
     #end
 
-  elsif dock == 'true'
-    print "docker provider"
+  elsif docker_provider == 'true'
+       h = Hash[*File.read('sfm/sfm_config.txt').split(/[= \n]+/)]
        config.vm.define "combinedb" do |db|
         db.vm.provider "docker" do |d|
            d.name = "combinedb"
            d.image = "ncsulibrariesdli/combine_pg"
+           d.pull = true
            d.env = {
 		"POSTGRES_PASSWORD" => "gherD42#dl5"
    	   }
@@ -106,9 +119,10 @@ Vagrant.configure(2) do |config|
        config.vm.define "lentil" do |app|
         app.vm.provider "docker" do |d|
            d.name = "lentilapp"
-           d.image = "mpancha/combine_lentil"
+           d.image = "ncsulibrariesdli/combine_lentil:dev"
+           d.pull = true
            d.link "combinedb:mydb"
-	   d.ports = ["3000:3000"]
+	   d.ports = ["#{LENTIL_PORT}:3000"]
            d.volumes = ["#{current_dir}/lentil:/src/lentil","#{current_dir}/archive/lentil-store:/lentil-store"]
         end
        end
@@ -116,12 +130,13 @@ Vagrant.configure(2) do |config|
         app.vm.provider "docker" do |d|
            d.name = "sfmapp"
            d.image = "gwul/sfm_app"
+           d.pull = true
            d.link "combinedb:db"
-  	   d.ports = ["8000:80"]
+  	   d.ports = ["#{SFM_PORT}:80"]
            d.env = {
-		"SFM_TWITTER_DEFAULT_USERNAME" => "YOUR_TWITTER_USERNAME",
-		"SFM_TWITTER_CONSUMER_KEY" => "YOUR_TWITTER_CLIENT_ID",
-		"SFM_TWITTER_CONSUMER_SECRET" => "YOUR_TWITTER_SECRET"
+		"SFM_TWITTER_DEFAULT_USERNAME" => h['SFM_TWITTER_DEFAULT_USERNAME'],
+		"SFM_TWITTER_CONSUMER_KEY" => h['SFM_TWITTER_CONSUMER_KEY'],
+		"SFM_TWITTER_CONSUMER_SECRET" => h['SFM_TWITTER_CONSUMER_SECRET']
 	}
           d.volumes = ["#{current_dir}/sfm:/src/sfm","#{current_dir}/archive/sfm-store:/var/sfm"]
        end
@@ -129,8 +144,9 @@ Vagrant.configure(2) do |config|
       config.vm.define "web" do |web|
        web.vm.provider "docker" do |d|
            d.name = "webconfig"
-           d.image = "mpancha/combine_webconfig"
-	   d.ports = ["8080:8080"]
+           d.image = "ncsulibrariesdli/combine_webconfig:dev"
+           d.pull = true
+	   d.ports = ["#{WEBCONFIG_PORT}:8080"]
            d.env = { 
                  "DOCKER_HOST" => ENV['DOCKER_HOST']
            }
