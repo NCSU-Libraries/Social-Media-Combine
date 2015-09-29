@@ -35,7 +35,7 @@ Steps to run
     
 
    5.2. Combine without VM [tested on Ubuntu 14.04]
-   -  Install [Docker](https://docs.docker.com/installation) version 1.8.1 
+   -  Install [Docker](https://docs.docker.com/installation) version 1.8.1 or greater
    -  Run Docker Daemon on public interface
    
         Append following to the /etc/default/docker file
