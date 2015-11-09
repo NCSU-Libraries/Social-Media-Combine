@@ -5,3 +5,4 @@ sfm/sfm_config.txt
 web-configuration-tool/committed/values.txt
 web-configuration-tool/node_modules
 web-configuration-tool/bower_components
+.DS_Store
