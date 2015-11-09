@@ -108,7 +108,7 @@ Vagrant.configure(2) do |config|
        config.vm.define "combinedb" do |db|
         db.vm.provider "docker" do |d|
            d.name = "combinedb"
-           d.image = "ncsulibrariesdli/combine_pg"
+           d.image = "ncsulibrariesdli/combine_pg:latest"
            d.pull = true
            d.env = {
 		"POSTGRES_PASSWORD" => "gherD42#dl5"
@@ -119,7 +119,7 @@ Vagrant.configure(2) do |config|
        config.vm.define "lentil" do |app|
         app.vm.provider "docker" do |d|
            d.name = "lentilapp"
-           d.image = "ncsulibrariesdli/combine_lentil"
+           d.image = "ncsulibrariesdli/combine_lentil:latest"
            d.pull = true
            d.link "combinedb:mydb"
 	   d.ports = ["#{LENTIL_PORT}:3000"]
@@ -129,7 +129,7 @@ Vagrant.configure(2) do |config|
        config.vm.define "sfm" do |app|
         app.vm.provider "docker" do |d|
            d.name = "sfmapp"
-           d.image = "gwul/sfm_app"
+           d.image = "gwul/sfm_app:latest"
            d.pull = true
            d.link "combinedb:db"
   	   d.ports = ["#{SFM_PORT}:80"]
@@ -144,7 +144,7 @@ Vagrant.configure(2) do |config|
       config.vm.define "web" do |web|
        web.vm.provider "docker" do |d|
            d.name = "webconfig"
-           d.image = "ncsulibrariesdli/combine_webconfig"
+           d.image = "ncsulibrariesdli/combine_webconfig:latest"
            d.pull = true
 	   d.ports = ["#{WEBCONFIG_PORT}:8080"]
            d.env = {
