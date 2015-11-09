@@ -75,7 +75,7 @@ Vagrant.configure(2) do |config|
      config.vm.network "forwarded_port", guest: 8080, host: 8081, auto_correct: false
      config.vm.network "forwarded_port", guest: 3000, host: 3001, auto_correct: false
 
-     
+
   # Allocate RAM to VM
   # Parallels image
      config.vm.provider "parallels" do |p, override|
@@ -113,13 +113,13 @@ Vagrant.configure(2) do |config|
            d.env = {
 		"POSTGRES_PASSWORD" => "gherD42#dl5"
    	   }
-        end  
+        end
        end
-  
+
        config.vm.define "lentil" do |app|
         app.vm.provider "docker" do |d|
            d.name = "lentilapp"
-           d.image = "ncsulibrariesdli/combine_lentil:dev"
+           d.image = "ncsulibrariesdli/combine_lentil"
            d.pull = true
            d.link "combinedb:mydb"
 	   d.ports = ["#{LENTIL_PORT}:3000"]
@@ -144,10 +144,10 @@ Vagrant.configure(2) do |config|
       config.vm.define "web" do |web|
        web.vm.provider "docker" do |d|
            d.name = "webconfig"
-           d.image = "ncsulibrariesdli/combine_webconfig:dev"
+           d.image = "ncsulibrariesdli/combine_webconfig"
            d.pull = true
 	   d.ports = ["#{WEBCONFIG_PORT}:8080"]
-           d.env = { 
+           d.env = {
                  "DOCKER_HOST" => ENV['DOCKER_HOST']
            }
            d.volumes = ["#{current_dir}/lentil:/src/lentil","#{current_dir}/sfm:/src/sfm","#{current_dir}/web-configuration-tool:/src/web-configuration-tool","#{current_dir}/config_updates:/src/config_updates"]
@@ -165,5 +165,5 @@ Vagrant.configure(2) do |config|
           host_shell.inline = 'start "link" "http://localhost:8081"'
         end
       end
-    end 
-end #config end 
+    end
+end #config end
