@@ -17,27 +17,26 @@ What's inside?
 Steps to run
 -------------
 1. Install [Git](https://help.github.com/articles/set-up-git/)
-2. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-3. Install [Vagrant](https://www.vagrantup.com/downloads.html) version 1.7.4 or greater on your host machine.
-4. Open `Terminal` on a Mac, `Git Shell` on Windows, or your preferred shell on Linux and clone this repository using git.
+2. Install [Vagrant](https://www.vagrantup.com/downloads.html) version 1.7.4 or greater on your host machine.
+3. Open `Terminal` on a Mac, `Git Shell` on Windows, or your preferred shell on Linux and clone this repository using git.
 
     ```
     git clone https://github.com/NCSU-Libraries/Social-Media-Combine.git
     cd Social-Media-Combine
     ```
-5. You can run Combine on VM or Combine without VM (directly on Docker)
+4. You can run Combine on VM or Combine without VM (directly on Docker)
 
-  5.1. Combine on VM
+  4.1. Combine on VM
 
       ```
       vagrant up
       ```
-    
 
-   5.2. Combine without VM [tested on Ubuntu 14.04]
+
+   4.2. Combine without VM [tested on Ubuntu 14.04]
    -  Install [Docker](https://docs.docker.com/installation) version 1.8.1 or greater
    -  Run Docker Daemon on public interface
-   
+
         Append following to the /etc/default/docker file
 
            ```
@@ -57,20 +56,22 @@ Steps to run
            export VAGRANT_NO_PARALLEL=true
            ```
    - Run
-   
+
        ```
        vagrant up --docker=true
        ```
 > **If working on Windows** and `vagrant up` immediately returns errors, you may need to run `sh eol_to_unix.sh`
 
     This opens a web browser with configuration form. If it doesn't, visit <http://localhost:8081> in your browser. Make changes and click OK.
-   
+
 6. Enter configuration parameters in the web configuration form and click OK. Your applications should be updated within a minute or so.
 
 Visit:
  - Lentil: <http://localhost:3001>
  - Social Feed Manager: <http://localhost:8001>
  - Configuration tool: <http://localhost:8081>
+
+> To stop the Social Media Combine virtual machine, run `vagrant halt` in the project directory.
 
 Troubleshooting
 ---------------
