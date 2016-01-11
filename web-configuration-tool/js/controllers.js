@@ -22,9 +22,9 @@ app.controller("FormController", function($scope, $http, $templateCache) {
         "validationMessage": "Entered value should be greater than 2 and less than 100 characters."
       },
       "instagram_access_token": {
-        "title": "Instagram Access Token (OPTIONAL)",
+        "title": "Instagram Access Token",
         "type": "string",
-        "description": "Instagram OAuth token. Only required for posting donor agreements, not for harvesting.",
+        "description": "Instagram OAuth access token.",
         "maxLength": 100,
         "minLength": 2,
         "validationMessage": "Entered value should be greater than 2 and less than 100 characters."
@@ -137,6 +137,7 @@ app.controller("FormController", function($scope, $http, $templateCache) {
     "required": [
       "instagram_client_id",
       "instagram_client_secret",
+      "instagram_access_token",
       "organization_name",
       "division_url",
       "application_name",
@@ -164,7 +165,7 @@ app.controller("FormController", function($scope, $http, $templateCache) {
       "fieldHtmlClass": "ics_field"
     }, {
       "key": "instagram_access_token",
-      "placeholder": "Enter Instagram Access Token Value (OPTIONAL)",
+      "placeholder": "Enter Instagram Access Token Value",
       "htmlClass": "content",
       "labelHtmlClass": "iat_label",
       "fieldHtmlClass": "iat_field"
