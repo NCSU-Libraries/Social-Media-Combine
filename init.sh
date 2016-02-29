@@ -13,7 +13,7 @@ sudo apt-get -y remove puppet chef
 sudo apt-get -y install curl wget inoticoming htop
 
 echo "Installing docker-compose..."
-wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py
 
 /usr/local/bin/pip install -U docker-compose
