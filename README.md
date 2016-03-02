@@ -4,6 +4,7 @@ Social Media Combine
 The Social Media Combine makes developing collections of social media much easier. It pre-assembles Lentil (for Instagram data harvesting) and Social Feed Manager (for Twitter data harvesting), along with the web servers and databases needed for their use, into a single package that can be deployed to desktop and laptop computers and used in Windows, OSX, or Linux. We believe in the [documentary value of social media archives](https://medium.com/on-archivy/documenting-the-now-ferguson-in-the-archives-adcdbe1d5788) and hope that the Social Media Combine will make it possible to quickly collect social media data on everyday hardware.
 
 **This is an alpha release. Please do not use this for production services.**
+> Instagram has removed access to a large portion of their public API in favor of a focus on their advertising API. Lentil will work with pre-existing developer credentials until June 2016, but we are currently [attempting to contact Instagram and Facebook](https://twitter.com/cazzerson/status/671448637872934912) to discuss blanket application approvals for academic uses. We are also developing an API access submission packet for general use.
 
 What's inside?
 --------------
