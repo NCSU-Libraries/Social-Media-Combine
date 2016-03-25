@@ -36,6 +36,7 @@ end
 required_plugins = "vagrant-host-shell vagrant-exec vagrant-vbguest"
 
 if alreadyUpdated != 'true' && (ARGV[0] == "up" || ARGV[0] == "provision")
+  system "vagrant plugin install #{required_plugins}"
   system "vagrant plugin update #{required_plugins}"
   ENV['VAGRANT_PLUGINS_UPDATED'] = 'true'
   ENV['VAGRANT_NO_PARALLEL']='true'
