@@ -70,6 +70,10 @@ Steps to run
 Visit:
  - Lentil: <http://localhost:3001>
  - Social Feed Manager: <http://localhost:8001>
+ - twarc: run `vagrant ssh` on the command line and then the twarc.py
+   commands described in the [official twarc
+documentation](https://github.com/edsu/twarc). Store output files in the
+`/vagrant/archive/twarc-store` directory.
  - Configuration tool: <http://localhost:8081>
 
 > To stop the Social Media Combine virtual machine, run `vagrant halt` in the project directory.
@@ -149,6 +153,8 @@ TO DO
 
 The development of the Social Media Combine environment was partially supported by federal Library Services and Technology Act (LSTA) funds made possible through a grant from the Institute of Museum and Library Services, and administered by the State Library of North Carolina, a division of the Department of Cultural Resources. This grant-funded project, "New Voices and Fresh Perspectives," is hosted by NCSU Libraries and led by Brian Dietz and Jason Casden.
 
-Social Feed Manager is developed at George Washington University Libraries.
+[Social Feed Manager](https://github.com/gwu-libraries/social-feed-manager) is developed at George Washington University Libraries.
 
-Lentil is developed at NCSU Libraries.
+[Lentil](https://github.com/NCSU-Libraries/lentil) is developed at NCSU Libraries.
+
+[twarc](https://github.com/edsu/twarc) is developed by Ed Summers.

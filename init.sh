@@ -16,7 +16,7 @@ echo "Installing docker-compose..."
 wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py
 
-/usr/local/bin/pip install -U docker-compose
+/usr/local/bin/pip install -U docker-compose twarc
 
 cd /vagrant
 
