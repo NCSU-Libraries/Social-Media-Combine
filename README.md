@@ -10,6 +10,7 @@ What's inside?
 --------------
 * [Social Feed Manager](https://github.com/gwu-libraries/social-feed-manager) Twitter collecting software from GWU Libraries
 * [Lentil](https://github.com/NCSU-Libraries/lentil) Instagram collecting software from NCSU Libraries
+* [twarc](https://github.com/edsu/twarc) Twitter collecting software developed by Ed Summers
 * A full pre-configured server environment to support all included software
 * A new single web-based configuration interface for all included software
 * Upgrade and system management scripts
