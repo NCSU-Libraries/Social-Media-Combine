@@ -70,7 +70,8 @@ Steps to run
 
 Visit:
  - Lentil: <http://localhost:3001>
- - Social Feed Manager: <http://localhost:8001>
+ - (old) Social Feed Manager: <http://localhost:8001>
+- (new, beta) Social Feed Manager: <http://localhost:8002> 
  - twarc: run `vagrant ssh` on the command line and then the twarc.py
    commands described in the [official twarc
 documentation](https://github.com/edsu/twarc). Store output files in the

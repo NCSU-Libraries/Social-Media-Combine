@@ -72,6 +72,7 @@ Vagrant.configure(2) do |config|
   # 8001 -> for sfm
   # 3001 -> for lentil
   # 8081 -> for the web configuration tool
+     config.vm.network "forwarded_port", guest: 8001, host: 8002, auto_correct: false
      config.vm.network "forwarded_port", guest: 8000, host: 8001, auto_correct: false
      config.vm.network "forwarded_port", guest: 8080, host: 8081, auto_correct: false
      config.vm.network "forwarded_port", guest: 3000, host: 3001, auto_correct: false

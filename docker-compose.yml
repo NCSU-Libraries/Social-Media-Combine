@@ -28,6 +28,194 @@ sfmapp:
   env_file:
     - ./sfm/sfm_config.txt
   restart: always
+sfmrabbit:
+    image: rabbitmq@sha256:a5180a37b0baebb938ee9d12dd11eed64a909288d7f344e24771278f8a122367
+    # RabbitMQ 3-management
+    ports:
+        # Opens up the ports for RabbitMQ management
+        - "15672:15672"
+    environment:
+        - TZ=America/New_York
+        - RABBITMQ_DEFAULT_USER=sfm_user
+    # From secrets.env, get rabbit user password.
+    env_file:
+        - ./secrets.env
+    restart: always
+sfmdb:
+    image: gwul/sfm-ui-db:1.0.0
+    environment:
+        - TZ=America/New_York
+    # From secrets.env, get postgres password.
+    env_file:
+        - ./secrets.env
+    restart: always
+    volumes_from:
+        - sfmdata
+sfmuiapp:
+    image: gwul/sfm-ui:1.0.0
+    ports:
+        - "8001:80"
+    links:
+        - sfmdb:db
+        - sfmrabbit:mq
+    environment:
+        - TZ=America/New_York
+        # Logging options
+        - SFM_DEBUG=False
+        #- SFM_DJANGO_LOG=DEBUG
+        #- SFM_DJANGO_REQUEST_LOG=DEBUG
+        #- SFM_APSCHEDULER_LOG=DEBUG
+        #- SFM_UI_LOG=DEBUG
+        # This is the public hostname and port. It is used for Django's ALLOWED_HOSTS
+        # and for links in emails.
+        # FOR PRODUCTION, THIS MUST BE SET CORRECTLY OR YOU WILL GET A BAD REQUEST (400).
+        - SFM_HOST=localhost:8002
+        - SFM_SMTP_HOST=smtp.gmail.com
+        - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
+    # From secrets.env, get email configuration and site admin password.
+    # Also, optionally get twitter and weibo credentials.
+    env_file:
+        - ./secrets.env
+    restart: always
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmflickrharvester:
+    image: gwul/sfm-flickr-harvester:1.0.0
+    links:
+        - sfmrabbit:mq
+    environment:
+        - TZ=America/New_York
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmflickrexporter:
+    image: gwul/sfm-flickr-exporter:1.0.0
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmtwitterrestharvester:
+    image: gwul/sfm-twitter-rest-harvester:1.0.0
+    links:
+        - sfmrabbit:mq
+    environment:
+        - TZ=America/New_York
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmtwitterstreamharvester:
+    image: gwul/sfm-twitter-stream-harvester:1.0.0
+    links:
+        - sfmrabbit:mq
+    environment:
+        - TZ=America/New_York
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmtwitterrestexporter:
+    image: gwul/sfm-twitter-rest-exporter:1.0.0
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - TZ=America/New_York
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmtwitterstreamexporter:
+    image: gwul/sfm-twitter-stream-exporter:1.0.0
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - TZ=America/New_York
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmweiboharvester:
+    image: gwul/sfm-weibo-harvester:1.0.0
+    links:
+        - sfmrabbit:mq
+    environment:
+        - TZ=America/New_York
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmweiborestexporter:
+    image: gwul/sfm-weibo-exporter:1.0.0
+    links:
+        - sfmrabbit:mq
+        - sfmuiapp:api
+    environment:
+        - TZ=America/New_York
+        - DEBUG=False
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmheritrix:
+    image: gwul/sfm-heritrix:1.0.0
+    ports:
+        # Opens up the port for Heritrix admin console.
+        - "8443:8443"
+    environment:
+        - TZ=America/New_York
+        # Memory for heritrix
+        - JAVA_OPTS=-Xmx512M
+        - HERITRIX_USER=sfm_user
+    # From secrets.env, get heritrix user password.
+    env_file:
+        - ./secrets.env
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmwebharvester:
+    image: gwul/sfm-web-harvester:1.0.0
+    links:
+        - sfmrabbit:mq
+        - sfmheritrix:heritrix
+    environment:
+        - TZ=America/New_York
+        - DEBUG=False
+        # Identifies the requester when harvesting web resources with Heritrix.
+        - HERITRIX_CONTACT_URL=http://library.gwu.edu
+    volumes_from:
+        - sfmdata
+    restart: always
+sfmdata:
+    image: ubuntu:14.04
+    command: /bin/true
+    volumes:
+         # This declares a volume that is internal to docker.
+         - /sfm-data
+         # This declares a volume that is linked to an external location.
+         # - "/src/sfm-data:/sfm-data"
+# Example sfm-elk container.
+#sfmelk:
+#    image: gwul/sfm-elk:1.0.0
+#    ports:
+#      # Kibana web interface
+#      - "5601:5601"
+#      # Elasticsearch JSON interface
+#      - "9200:9200"
+#      # Logstash server
+#      - "5000:5000"
+#    links:
+#      - sfmrabbit:mq
+#    volumes_from:
+#      - sfmdata
+#    # To limit to a particular collection set.
+#    #command: --collection-set=04afb3d938aa468ca2a71de0824da126
 webconfig:
   #Uncomment below line to build new image
   #build: web-configuration-tool/.

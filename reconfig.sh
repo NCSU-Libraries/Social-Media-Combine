@@ -14,4 +14,5 @@ docker-compose stop webconfig
 docker-compose stop sfmapp
 docker-compose stop lentilapp
 docker-compose stop combinedb
+docker-compose stop
 docker-compose up -d --timeout 300
