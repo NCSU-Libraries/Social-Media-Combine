@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -l
 echo "invoke script"
 cd /home/app/lentilapp
 #ADDHOST=`echo "8 a  host: $MYDB_PORT_3306_TCP_ADDR"`
@@ -41,8 +41,10 @@ done
 
 # if not already installed
 if [ ! -e installed ]; then
+  bundle update
   # run lentil generator
   yes | bundle exec rails generate lentil:install
+  bundle update
 
   # run upgrade hooks
   # mark installed
@@ -56,4 +58,4 @@ cp /src/lentil/schedule.rb /home/app/lentilapp/config/schedule.rb
 cp '/src/lentil/lentil_config.yml' 'config/lentil_config.yml'
 
 # update crontab
-whenever -i
+bundle exec whenever -i
