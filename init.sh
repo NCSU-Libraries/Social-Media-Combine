@@ -10,7 +10,9 @@ echo "Override docker upstart init config"
 echo "start on (vagrant-mounted and filesystem and net-device-up IFACE!=lo)" > /etc/init/docker.override
 echo "Install curl if required..."
 sudo apt-get -y remove puppet chef
-sudo apt-get -y install curl wget inoticoming htop
+sudo apt-get upgrade -y -o Dpkg::Options::="--force-confold"
+sudo apt-get -y install curl wget inoticoming htop \
+  linux-image-extra-$(uname -r) linux-image-extra-virtual
 
 echo "Installing docker-compose..."
 wget https://bootstrap.pypa.io/get-pip.py
