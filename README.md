@@ -122,7 +122,7 @@ Steps for updating applications
 
 Feedback
 ========
-Please email Jason Casden at jmcasden@ncsu.edu with any questions or suggestions.
+Please email Bret Davidson at bddavids@ncsu.edu with any questions or suggestions.
 
 TO DO
 =====
