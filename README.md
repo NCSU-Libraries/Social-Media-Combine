@@ -26,14 +26,11 @@ Steps to run
     git clone https://github.com/NCSU-Libraries/Social-Media-Combine.git
     cd Social-Media-Combine
     ```
-4. You can run Combine on VM or Combine without VM (directly on Docker)
+4. You can run Combine on VM (step 4.1) OR Combine without VM (directly on Docker)(step 4.2).
 
   4.1. Combine on VM
-
-      ```
-      vagrant up
-      ```
-
+   - Install [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
+   - Run `vagrant up` from within the Social-Media-Combine directory.
 
    4.2. Combine without VM [tested on Ubuntu 14.04]
    -  Install [Docker](https://docs.docker.com/installation) version 1.8.1 or greater
